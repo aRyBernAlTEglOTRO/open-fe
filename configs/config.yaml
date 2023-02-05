@@ -1,0 +1,34 @@
+data:
+  train:
+    file_path: "data/train.csv"
+    target_column: "median_house_value"
+  test:
+    file_path: "data/test.csv"
+  submit:
+    file_path: "data/submit.csv"
+
+model:
+  name: "LGBMRegressor"
+  params:
+    learning_rate: 0.01
+    n_estimators: 100000
+    metric: rmse
+    n_jobs: 4
+    verbosity: -1
+
+trainer:
+  name: "MLTrainer"
+  params:
+    split_method:
+      name: "KFold"
+      params:
+        n_splits: 5
+        random_state: 2023
+        shuffle: True
+
+algorithm:
+  name: OpenFE
+  params:
+    max_order: 5
+    data_block_number: 8
+    task: "regression"
